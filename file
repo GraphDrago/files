@@ -10,3 +10,4 @@
         $('#log').append('Выбранные файлы:'+output.join(''));
         $('#count').val(i);
     });
+document.getElementById('file').addEventListener('change', handleFileSelect, false);

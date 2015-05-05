@@ -1,13 +1,10 @@
-    //document.getElementById('file').addEventListener('change', handleFileSelect, false);
-    //function handleFileSelect(evt) {
-    $('#file').on('change', function (evt){
-        var i, f, files;
-        var files = evt.target.files; // FileList object
-        var output = [];
-        for (i = 0; f = files[i]; i++) {
-            output.push('<li>'+ f.name + '</li>');
-        }
-        $('#log').append('Выбранные файлы:'+output.join(''));
-        $('#count').val(i);
-    });
-document.getElementById('file').addEventListener('change', handleFileSelect, false);
+            $res =  mysql_query ("SELECT b.Name, m.Login, m.idManager, b.idBranch
+                                          FROM manager m
+                                          INNER JOIN branch b ON m.Branch_idBranch = b.idBranch
+                                          INNER JOIN district d ON b.District_idDistrict = d.idDistrict
+                                          WHERE b.Name = '".$branch."' and m.Login = $manager")
+            or (json_encode(array('response' => 'Ошибка при обращении к БД.
+            Попробуйте обновить страницу или обратится к администратору.23'
+            )));
+            $data = mysql_fetch_assoc($res);
+            $idManager = $data['idManager'];
